@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carne y Humo El Jobo — Lo mejor en carne asada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --negro: #0a0a0a;
+            --carbon: #141414;
+            --carbon2: #1c1c1c;
+            --rojo: #c0392b;
+            --rojo2: #e74c3c;
+            --dorado: #d4a017;
+            --dorado2: #f0c040;
+            --humo: #2a2a2a;
+            --gris: #888;
+            --blanco: #f5f0eb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--negro);
+            color: var(--blanco);
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--negro); }
+        ::-webkit-scrollbar-thumb { background: var(--rojo); border-radius: 3px; }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 999;
+            padding: 1.2rem 0;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(192,57,43,0.2);
+            transition: all 0.3s;
+        }
+        nav.scrolled { padding: 0.7rem 0; }
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--blanco);
+            text-decoration: none;
+        }
+        .logo span { color: var(--rojo); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: rgba(245,240,235,0.7);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--dorado); }
+        .nav-cta {
+            background: var(--rojo);
+            color: white !important;
+            padding: 0.55rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: background 0.2s !important;
+        }
+        .nav-cta:hover { background: var(--rojo2) !important; color: white !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 24px; height: 2px; background: var(--blanco); transition: all 0.3s; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex; align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(to right, rgba(10,10,10,0.97) 40%, rgba(10,10,10,0.6) 100%),
+                url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1400&q=80') center/cover no-repeat;
+        }
+        .hero-embers {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 50% 60% at 80% 50%, rgba(192,57,43,0.15) 0%, transparent 70%);
+            animation: emberGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes emberGlow {
+            from { opacity: 0.6; }
+            to   { opacity: 1; }
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 1100px; margin: 0 auto;
+            padding: 8rem 1.5rem 4rem;
+        }
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(192,57,43,0.15);
+            border: 1px solid rgba(192,57,43,0.4);
+            color: var(--rojo2);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.0;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--rojo);
+            display: block;
+        }
+        .hero p {
+            color: rgba(245,240,235,0.65);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-red {
+            background: var(--rojo);
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.25s;
+            border: none; cursor: pointer;
+        }
+        .btn-red:hover { background: var(--rojo2); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(192,57,43,0.4); color: white; }
+        .btn-outline {
+            border: 1px solid rgba(245,240,235,0.3);
+            color: var(--blanco);
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--dorado); color: var(--dorado); }
+        .hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            color: rgba(255,255,255,0.25); font-size: 0.7rem; letter-spacing: 2px;
+        }
+        .hero-scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(180deg, var(--rojo), transparent);
+            animation: scrollLine 1.5s ease-in-out infinite;
+        }
+        @keyframes scrollLine { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* ── STATS ── */
+        .stats {
+            background: var(--carbon);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem 0;
+        }
+        .stats-inner {
+            max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .stat { text-align: center; padding: 1rem; }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--rojo);
+            line-height: 1;
+        }
+        .stat-label { font-size: 0.82rem; color: var(--gris); margin-top: 4px; }
+
+        /* ── SECTIONS ── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 5rem 0; }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rojo);
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+        .section-sub {
+            color: rgba(245,240,235,0.55);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        /* ── MENÚ ── */
+        #menu { background: var(--negro); }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .menu-card {
+            background: var(--carbon2);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s;
+            cursor: pointer;
+        }
+        .menu-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(192,57,43,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .menu-img {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .menu-card:hover .menu-img img { transform: scale(1.08); }
+        .menu-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: var(--rojo);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+        .menu-body { padding: 1.5rem; }
+        .menu-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .menu-body p { color: var(--gris); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
+        .menu-price {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .price-tag {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dorado);
+            font-family: 'Playfair Display', serif;
+        }
+        .price-unit { font-size: 0.75rem; color: var(--gris); }
+        .add-btn {
+            width: 36px; height: 36px;
+            background: var(--rojo);
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .add-btn:hover { background: var(--rojo2); transform: scale(1.1); }
+
+        /* ── EXPERIENCIA ── */
+        #experiencia { background: var(--carbon); }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        .exp-img-wrap {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .exp-img-wrap img {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+            filter: brightness(0.85);
+        }
+        .exp-img-badge {
+            position: absolute; bottom: -1rem; right: 1.5rem;
+            background: var(--rojo);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.7rem 1.3rem;
+            border-radius: 100px;
+            box-shadow: 0 8px 20px rgba(192,57,43,0.4);
+        }
+        .exp-features { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        .exp-feat {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .exp-feat:hover { border-color: rgba(192,57,43,0.25); background: rgba(192,57,43,0.05); }
+        .exp-icon {
+            width: 42px; height: 42px; flex-shrink: 0;
+            background: rgba(192,57,43,0.15);
+            border: 1px solid rgba(192,57,43,0.25);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--rojo2); font-size: 1rem;
+        }
+        .exp-feat h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+        .exp-feat p { color: var(--gris); font-size: 0.85rem; line-height: 1.5; }
+
+        /* ── RESEÑAS ── */
+        #resenas { background: var(--negro); }
+        .resenas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .resena-card {
+            background: var(--carbon2);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s;
+        }
+        .resena-card:hover { transform: translateY(-4px); border-color: rgba(212,160,23,0.25); }
+        .stars { color: var(--dorado); font-size: 0.9rem; margin-bottom: 1rem; }
+        .resena-texto {
+            color: rgba(245,240,235,0.75);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .resena-autor { display: flex; align-items: center; gap: 12px; }
+        .autor-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rojo), var(--dorado));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; color: white;
+        }
+        .autor-nombre { font-weight: 600; font-size: 0.9rem; }
+        .autor-zona { color: var(--gris); font-size: 0.78rem; }
+
+        /* ── CONTACTO ── */
+        #contacto { background: var(--carbon); }
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .info-item {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-icon {
+            width: 42px; height: 42px; flex-shrink: 0;
+            background: rgba(192,57,43,0.12);
+            border: 1px solid rgba(192,57,43,0.25);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--rojo2); font-size: 1rem;
+        }
+        .info-label { font-size: 0.75rem; color: var(--gris); display: block; margin-bottom: 2px; }
+        .info-value { font-weight: 600; font-size: 0.95rem; }
+        .form-card {
+            background: var(--carbon2);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.83rem; color: rgba(245,240,235,0.55); margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--blanco);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: rgba(192,57,43,0.5);
+            background: rgba(255,255,255,0.07);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-group select option { background: #1c1c1c; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #060606;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem 0 1.5rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+        .footer-logo span { color: var(--rojo); }
+        .footer-desc { color: var(--gris); font-size: 0.88rem; line-height: 1.7; max-width: 260px; }
+        .footer-social { display: flex; gap: 8px; margin-top: 1.25rem; }
+        .footer-social a {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gris); text-decoration: none;
+            transition: all 0.2s;
+        }
+        .footer-social a:hover { background: rgba(192,57,43,0.15); border-color: rgba(192,57,43,0.3); color: var(--rojo2); }
+        .footer-col h5 {
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: rgba(245,240,235,0.35);
+            margin-bottom: 1rem;
+        }
+        .footer-col a { display: block; color: var(--gris); text-decoration: none; font-size: 0.88rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--rojo2); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-bottom p { color: var(--gris); font-size: 0.82rem; }
+
+        /* ── WHATSAPP ── */
+        .wa-float {
+            position: fixed; bottom: 24px; right: 24px; z-index: 998;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+        }
+        .wa-tooltip {
+            background: var(--carbon2);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--blanco);
+            font-size: 0.8rem; font-weight: 600;
+            padding: 6px 14px; border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0; transform: translateX(10px);
+            transition: all 0.3s; pointer-events: none;
+        }
+        .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+        .wa-btn {
+            width: 56px; height: 56px;
+            background: #25d366; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: white; text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37,211,102,0.35);
+            transition: all 0.3s; position: relative;
+        }
+        .wa-btn:hover { transform: scale(1.1); color: white; }
+        .wa-pulse {
+            position: absolute; inset: 0; border-radius: 16px;
+            background: #25d366;
+            animation: waPulse 2s ease-out infinite;
+        }
+        @keyframes waPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.7); opacity: 0; } }
+
+        /* ── FADE IN ── */
+        .fade { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade.in { opacity: 1; transform: translateY(0); }
+        .fade-d1 { transition-delay: 0.1s; }
+        .fade-d2 { transition-delay: 0.2s; }
+        .fade-d3 { transition-delay: 0.3s; }
+        .fade-d4 { transition-delay: 0.4s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .exp-grid { grid-template-columns: 1fr; }
+            .contacto-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: -1px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="#">Carne y Humo <span>El Jobo</span></a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menú</a></li>
+            <li><a href="#experiencia">Nuestra Historia</a></li>
+            <li><a href="#resenas">Reseñas</a></li>
+            <li><a href="#contacto" class="nav-cta">Reservar Mesa</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-embers"></div>
+    <div class="hero-content">
+        <div class="hero-tag fade"><i class="fas fa-fire"></i> Liberia, Guanacaste · Costa Rica</div>
+        <h1 class="fade fade-d1">
+            Lo mejor en
+            <em>Carne Asada</em>
+        </h1>
+        <p class="fade fade-d2">Cortes premium ahumados a la leña con técnicas artesanales. Viviana Quintanilla y su equipo llevan la pasión por la carne a otro nivel en Guanacaste.</p>
+        <div class="hero-btns fade fade-d3">
+            <a href="#menu" class="btn-red"><i class="fas fa-utensils"></i> Ver el Menú</a>
+            <a href="https://wa.me/50662788149" target="_blank" class="btn-outline"><i class="fab fa-whatsapp"></i> Reservar ahora</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>SCROLL</span>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stats-inner">
+        <div class="stat fade">
+            <div class="stat-num" data-target="8">0</div>
+            <div class="stat-label">Cortes en el menú</div>
+        </div>
+        <div class="stat fade fade-d1">
+            <div class="stat-num" data-target="500">0</div>
+            <div class="stat-label">Clientes satisfechos</div>
+        </div>
+        <div class="stat fade fade-d2">
+            <div class="stat-num" data-target="100">0</div>
+            <div class="stat-label">% leña natural</div>
+        </div>
+        <div class="stat fade fade-d3">
+            <div class="stat-num" data-suffix="★">4.9</div>
+            <div class="stat-label">Calificación promedio</div>
+        </div>
+    </div>
+</div>
+
+<!-- MENÚ -->
+<section id="menu">
+    <div class="container">
+        <div class="fade">
+            <div class="section-label">Nuestros Cortes</div>
+            <h2 class="section-title">El menú que todos<br>están hablando</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="Tomahawk">
+                    <span class="menu-badge">⭐ Estrella</span>
+                </div>
+                <div class="menu-body">
+                    <h3>Tomahawk Ahumado</h3>
+                    <p>Corte premium de 1.2kg ahumado a la leña de guanacaste por 4 horas. Jugoso por dentro, costra perfecta por fuera.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡28,000</div>
+                            <div class="price-unit">por porción</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Tomahawk Ahumado')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade fade-d1">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80" alt="Costillas">
+                    <span class="menu-badge">🔥 Más pedido</span>
+                </div>
+                <div class="menu-body">
+                    <h3>Costillas BBQ El Jobo</h3>
+                    <p>Rack completo de costillas con marinada secreta de 24 horas y salsa BBQ artesanal de la casa.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡18,000</div>
+                            <div class="price-unit">rack completo</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Costillas BBQ El Jobo')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade fade-d2">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&q=80" alt="Picanha">
+                </div>
+                <div class="menu-body">
+                    <h3>Picanha Brasileña</h3>
+                    <p>Corte brasileño con su capa de grasa característica. Servido con chimichurri casero y yuca frita.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡15,000</div>
+                            <div class="price-unit">400g</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Picanha Brasileña')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade fade-d1">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Parrillada">
+                    <span class="menu-badge">👨‍👩‍👧 Para compartir</span>
+                </div>
+                <div class="menu-body">
+                    <h3>Parrillada El Jobo</h3>
+                    <p>Selección de 4 cortes para 2-3 personas: costilla, churrasco, chorizo artesanal y pollo ahumado.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡35,000</div>
+                            <div class="price-unit">2-3 personas</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Parrillada El Jobo')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade fade-d2">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Brisket">
+                </div>
+                <div class="menu-body">
+                    <h3>Brisket Texas Style</h3>
+                    <p>Pecho de res ahumado 12 horas al estilo Texas. Suave como mantequilla. Solo fines de semana.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡12,000</div>
+                            <div class="price-unit">300g</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Brisket Texas Style')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade fade-d3">
+                <div class="menu-img">
+                    <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=600&q=80" alt="Churrasco">
+                </div>
+                <div class="menu-body">
+                    <h3>Churrasco de la Casa</h3>
+                    <p>Clásico churrasco tierno con ensalada del día, arroz y frijoles. El favorito de los ticos.</p>
+                    <div class="menu-price">
+                        <div>
+                            <div class="price-tag">₡9,500</div>
+                            <div class="price-unit">completo</div>
+                        </div>
+                        <button class="add-btn" onclick="pedirWhatsApp('Churrasco de la Casa')"><i class="fas fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+    <div class="container">
+        <div class="exp-grid">
+            <div class="fade">
+                <div class="exp-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Parrilla">
+                    <div class="exp-img-badge">🔥 Desde 2018 en Guanacaste</div>
+                </div>
+            </div>
+            <div class="fade fade-d2">
+                <div class="section-label">Nuestra Historia</div>
+                <h2 class="section-title">Pasión por el<br>fuego y la carne</h2>
+                <p style="color:rgba(245,240,235,0.6);line-height:1.75;margin-bottom:1.5rem;">
+                    Viviana Quintanilla comenzó asando carne para familia y amigos en Liberia. Lo que empezó como un hobby se convirtió en el negocio de carne más querido de la zona. Hoy, Carne y Humo El Jobo es sinónimo de calidad y sabor en Guanacaste.
+                </p>
+                <div class="exp-features">
+                    <div class="exp-feat">
+                        <div class="exp-icon"><i class="fas fa-fire-alt"></i></div>
+                        <div>
+                            <h4>Ahumado con leña de guanacaste</h4>
+                            <p>Usamos exclusivamente leña local que le da un sabor único e inigualable a cada corte.</p>
+                        </div>
+                    </div>
+                    <div class="exp-feat">
+                        <div class="exp-icon"><i class="fas fa-award"></i></div>
+                        <div>
+                            <h4>Carnes seleccionadas</h4>
+                            <p>Trabajamos con proveedores locales y seleccionamos cada corte personalmente para garantizar calidad.</p>
+                        </div>
+                    </div>
+                    <div class="exp-feat">
+                        <div class="exp-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Marinadas de 12 a 24 horas</h4>
+                            <p>Cada corte es marinado con especias artesanales. No hay atajos cuando se trata de sabor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas">
+    <div class="container">
+        <div class="text-center fade" style="text-align:center;">
+            <div class="section-label">Clientes Felices</div>
+            <h2 class="section-title">Lo que dice la gente</h2>
+        </div>
+        <div class="resenas-grid" style="margin-top:3rem;">
+            <div class="resena-card fade">
+                <div class="stars">★★★★★</div>
+                <p class="resena-texto">"El Tomahawk es una experiencia que no olvidás. La carne se derrite sola, el ahumado es perfecto. Vine de San José solo para esto."</p>
+                <div class="resena-autor">
+                    <div class="autor-avatar">MR</div>
+                    <div>
+                        <div class="autor-nombre">Marco Rodríguez</div>
+                        <div class="autor-zona">San José, Costa Rica</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resena-card fade fade-d1">
+                <div class="stars">★★★★★</div>
+                <p class="resena-texto">"Las costillas BBQ son las mejores que he probado en mi vida. La salsa de la casa es un secreto que deberían patentar."</p>
+                <div class="resena-autor">
+                    <div class="autor-avatar">KV</div>
+                    <div>
+                        <div class="autor-nombre">Karina Vargas</div>
+                        <div class="autor-zona">Liberia, Guanacaste</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resena-card fade fade-d2">
+                <div class="stars">★★★★★</div>
+                <p class="resena-texto">"La parrillada para compartir fue el hit de la noche. Viviana sabe exactamente cómo dejar cada corte en su punto. Lugar encantador."</p>
+                <div class="resena-autor">
+                    <div class="autor-avatar">JS</div>
+                    <div>
+                        <div class="autor-nombre">Jorge Solís</div>
+                        <div class="autor-zona">Nicoya, Guanacaste</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <div class="container">
+        <div class="contacto-grid">
+            <div class="fade">
+                <div class="section-label">Contáctenos</div>
+                <h2 class="section-title">Reserve su<br>mesa hoy</h2>
+                <p style="color:rgba(245,240,235,0.55);margin-bottom:2rem;line-height:1.7;">Sin compromisos. Le respondemos de inmediato por WhatsApp.</p>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div>
+                        <span class="info-label">WhatsApp / Teléfono</span>
+                        <span class="info-value">+506 6278-8149</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <span class="info-label">Ubicación</span>
+                        <span class="info-value">Liberia, Guanacaste, Costa Rica</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <span class="info-label">Horario</span>
+                        <span class="info-value">Martes a Domingo · 11am – 10pm</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fab fa-instagram"></i></div>
+                    <div>
+                        <span class="info-label">Instagram</span>
+                        <span class="info-value">@carneyhuno.eljobo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fade fade-d2">
+                <div class="form-card">
+                    <h4 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem;">Haga su reservación</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" placeholder="Su nombre">
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp</label>
+                            <input type="text" placeholder="+506 XXXX-XXXX">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Número de personas</label>
+                            <select>
+                                <option>1-2 personas</option>
+                                <option>3-4 personas</option>
+                                <option>5-8 personas</option>
+                                <option>Más de 8</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué le interesa pedir?</label>
+                        <textarea placeholder="Ej: Me interesa el Tomahawk y la parrillada para compartir..."></textarea>
+                    </div>
+                    <button class="btn-red" style="width:100%;justify-content:center;" onclick="reservarWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">Carne y Humo <span>El Jobo</span></div>
+                <p class="footer-desc">Lo mejor en carne asada y ahumados artesanales en Liberia, Guanacaste. Pasión por el fuego desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/50662788149"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Menú</h5>
+                <a href="#">Tomahawk Ahumado</a>
+                <a href="#">Costillas BBQ</a>
+                <a href="#">Picanha Brasileña</a>
+                <a href="#">Parrillada El Jobo</a>
+                <a href="#">Brisket Texas</a>
+            </div>
+            <div class="footer-col">
+                <h5>Información</h5>
+                <a href="#">Nuestra Historia</a>
+                <a href="#">Horarios</a>
+                <a href="#">Ubicación</a>
+                <a href="#">Reservaciones</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Carne y Humo El Jobo. Todos los derechos reservados.</p>
+            <p style="color:rgba(136,136,136,0.5);font-size:0.75rem;">Web desarrollada por <a href="#" style="color:var(--rojo);text-decoration:none;">Vértice Digital</a> · Liberia, CR</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-float">
+    <div class="wa-tooltip">Reservar por WhatsApp</div>
+    <a href="https://wa.me/50662788149?text=Hola%20Viviana!%20Vi%20su%20men%C3%BA%20y%20quisiera%20hacer%20una%20reservaci%C3%B3n" target="_blank" class="wa-btn">
+        <div class="wa-pulse"></div>
+        <i class="fab fa-whatsapp" style="position:relative;z-index:1"></i>
+    </a>
+</div>
+
+<script>
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Fade on scroll
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+    // Counters
+    const cObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || '+';
+            if (isNaN(target)) return;
+            let cur = 0;
+            const step = target / 60;
+            const t = setInterval(() => {
+                cur = Math.min(cur + step, target);
+                el.textContent = (Number.isInteger(target) ? Math.round(cur) : cur.toFixed(1)) + suffix;
+                if (cur >= target) clearInterval(t);
+            }, 20);
+            cObs.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num[data-target]').forEach(el => cObs.observe(el));
+
+    // WhatsApp pedir
+    function pedirWhatsApp(plato) {
+        window.open(`https://wa.me/50662788149?text=Hola%20Viviana!%20Quisiera%20pedir%20${encodeURIComponent(plato)}`, '_blank');
+    }
+
+    // Reservar
+    function reservarWhatsApp() {
+        const nombre = document.querySelector('input[placeholder="Su nombre"]').value || '';
+        const msg = nombre ? `Hola! Soy ${nombre} y quiero hacer una reservación.` : 'Hola! Quiero hacer una reservación.';
+        window.open(`https://wa.me/50662788149?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // Hamburger
+    function toggleMenu() {
+        const links = document.querySelector('.nav-links');
+        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '60px';
+        links.style.left = '0';
+        links.style.width = '100%';
+        links.style.background = '#0a0a0a';
+        links.style.padding = '1rem 1.5rem';
+    }
+
+    // Service card tilt
+    document.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = `translateY(-6px) rotateX(${-y*4}deg) rotateY(${x*4}deg)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+</script>
+</body>
+</html>
